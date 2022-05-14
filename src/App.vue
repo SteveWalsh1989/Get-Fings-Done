@@ -1,7 +1,6 @@
 <template>
   <v-app id="todo" class="h-full w-full">
     <NavBar />
-
     <v-main>
       <router-view></router-view>
     </v-main>

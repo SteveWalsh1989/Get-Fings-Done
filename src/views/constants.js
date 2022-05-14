@@ -9,7 +9,7 @@ export const navDrawerItems = [
   },
   {
     title: 'About',
-    icon: 'mdi-information',
+    icon: 'mdi-information-outline',
     path: '/about',
   },
 ];
