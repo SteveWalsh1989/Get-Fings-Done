@@ -1,5 +1,8 @@
 <template>
-  <v-container>tes{{ test }} </v-container>
+  <v-container class="flex">
+    <div class="bg-black text-white text-semibold">tes{{ test }}</div>
+    <div class="bg-black text-white text-semibold">tes2{{ test }}</div>
+  </v-container>
 </template>
 
 <script>
@@ -12,3 +15,5 @@ export default {
   },
 };
 </script>
+
+<style scoped></style>
