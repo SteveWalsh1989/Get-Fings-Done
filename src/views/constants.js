@@ -1,3 +1,6 @@
+/*
+ Links for the slide out nav drawer
+*/
 export const navDrawerItems = [
   {
     title: 'My Fings',
