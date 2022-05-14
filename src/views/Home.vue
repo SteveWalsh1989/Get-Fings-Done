@@ -1,8 +1,5 @@
 <template>
-  <v-container class="flex">
-    <div class="bg-black text-white text-semibold">tes{{ test }}</div>
-    <div class="bg-black text-white text-bold">tes2{{ test }}</div>
-  </v-container>
+  <v-container class="flex"> </v-container>
 </template>
 
 <script>
