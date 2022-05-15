@@ -30,37 +30,40 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import { ref, computed } from '@vue/composition-api';
 export default {
   name: 'Home',
-  data: function () {
-    return {
-      tasks: [
-        {
-          id: 1,
-          title: 'Buy milk',
-          description: 'Get some milk from the store',
-          completed: false,
-        },
-        {
-          id: 2,
-          title: 'Buy eggs',
-          description: 'Get some eggs from the store',
-          completed: false,
-        },
-        {
-          id: 3,
-          title: 'Buy bread',
-          description: 'Get some bread from the store',
-          completed: false,
-        },
-      ],
-    };
-  },
-  methods: {
-    toggleTaskCompletion(id) {
-      let task = this.tasks.filter((task) => task.id === id)[0];
+  setup() {
+    const tasks = ref([
+      {
+        id: 1,
+        title: 'Buy milk',
+        description: 'Get some milk from the store',
+        completed: false,
+      },
+      {
+        id: 2,
+        title: 'Buy eggs',
+        description: 'Get some eggs from the store',
+        completed: false,
+      },
+      {
+        id: 3,
+        title: 'Buy bread',
+        description: 'Get some bread from the store',
+        completed: false,
+      },
+    ]);
+
+    function toggleTaskCompletion(id) {
+      let task = tasks.value.filter((task) => task.id === id)[0];
       task.completed = !task.completed;
-    },
+    }
+    return {
+      tasks,
+      toggleTaskCompletion,
+    };
   },
 };
 </script>
