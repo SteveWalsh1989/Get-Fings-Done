@@ -1,17 +1,17 @@
 <template>
   <v-container class="">
-    <v-list subheader two-line flat>
-      <v-text-field
-        v-model="newTaskTitle"
-        @click:append="addTask"
-        @keyup.enter="addTask"
-        class="pa-3"
-        clearable
-        hide-details
-        outlined
-        label="Add new fing to do"
-        append-icon="mdi-plus"
-      ></v-text-field>
+    <v-text-field
+      v-model="newTaskTitle"
+      @click:append="addTask"
+      @keyup.enter="addTask"
+      class="pa-3"
+      clearable
+      hide-details
+      outlined
+      label="Add new fing to do"
+      append-icon="mdi-plus"
+    ></v-text-field>
+    <v-list v-if="tasks.length" subheader two-line flat>
       <div v-for="(task, index) in tasks" :key="index">
         <v-list-item
           :class="{ 'blue lighten-5': task.completed }"
@@ -40,14 +40,16 @@
         </v-list-item>
       </div>
     </v-list>
+    <EmptyState v-else />
   </v-container>
 </template>
 
 <script>
 import { ref } from '@vue/composition-api';
-
+import EmptyState from '@/components/EmptyState';
 export default {
   name: 'Home',
+  components: { EmptyState },
   setup() {
     const newTaskTitle = ref('');
     const tasks = ref([

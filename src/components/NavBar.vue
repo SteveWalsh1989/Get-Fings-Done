@@ -1,10 +1,6 @@
 <template>
   <nav>
-    <v-navigation-drawer
-      class="blue accent-1 white--text"
-      v-model="drawerOpen"
-      app
-    >
+    <v-navigation-drawer class="primary white--text" v-model="drawerOpen" app>
       <v-list-item class="white--text">
         <v-list-item-content>
           <v-list-item-title class="text-h6 text-white">
@@ -34,7 +30,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar color="blue accent-1" app>
+    <v-app-bar color="primary" app>
       <v-app-bar-nav-icon
         color="white"
         @click="drawerOpen = !drawerOpen"
