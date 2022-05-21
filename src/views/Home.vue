@@ -57,7 +57,11 @@ export default {
 
     function toggleTaskCompletion(id) {
       let task = tasks.value.filter((task) => task.id === id)[0];
-      task.completed = !task.completed;
+      if (task.completed) {
+        store.commit('uncompleteTask', id);
+      } else {
+        store.commit('completeTask', id);
+      }
     }
 
     const addTask = () => {

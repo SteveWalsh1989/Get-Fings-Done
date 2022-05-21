@@ -38,6 +38,14 @@ export default new Vuex.Store({
     deleteTask(state, id) {
       state.tasks = state.tasks.filter((task) => task.id !== id);
     },
+    completeTask(state, id) {
+      const index = state.tasks.findIndex((obj) => obj.id == id);
+      state.tasks[index].completed = true;
+    },
+    uncompleteTask(state, id) {
+      const index = state.tasks.findIndex((obj) => obj.id == id);
+      state.tasks[index].completed = false;
+    },
   },
   actions: {},
   modules: {},
