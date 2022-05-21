@@ -6,16 +6,25 @@
   >
     <template v-slot:default>
       <v-list-item-action>
-        <v-checkbox :input-value="task.completed" color="primary"></v-checkbox>
+        <v-checkbox
+          :input-value="task.completed"
+          color="primary"
+          :aria-pressed="task.completed"
+          aria-label="Mark as completed"
+        ></v-checkbox>
       </v-list-item-action>
       <v-list-item-content>
-        <v-list-item-title :class="{ 'line-through': task.completed }">
+        <v-list-item-title
+          :class="{ 'line-through': task.completed }"
+          :aria-label="task.title"
+          tabindex="0"
+        >
           {{ task.title }}
         </v-list-item-title>
       </v-list-item-content>
 
       <v-list-item-action>
-        <v-btn @click.stop="deleteTask(task.id)" icon>
+        <v-btn @click.stop="deleteTask(task.id)" aria-label="Delete" icon>
           <v-icon color="primary lighten-1">mdi-trash-can-outline</v-icon>
         </v-btn>
       </v-list-item-action>

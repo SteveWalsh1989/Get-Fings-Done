@@ -8,7 +8,7 @@
 
 <script>
 import { computed, ref } from '@vue/composition-api';
-import EmptyState from '@/components/EmptyState';
+import EmptyState from '@/components/Tasks/EmptyState';
 import AddTask from '@/components/Tasks/AddTask';
 import Tasklist from '@/components/Tasks/Tasklist';
 import store from '@/store';
@@ -17,10 +17,6 @@ export default {
   components: { AddTask, EmptyState, Tasklist },
   setup() {
     const tasks = computed(() => store.state.tasks);
-
-    function deleteTask(id) {
-      store.commit('deleteTask', id);
-    }
 
     return {
       tasks,
