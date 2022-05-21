@@ -95,7 +95,7 @@ export default new Vuex.Store({
       });
     },
     uncompleteTask({ commit }, id) {
-      commit('deleteTask', id);
+      commit('uncompleteTask', id);
       commit('showNotification', {
         text: 'Uncompleted fing',
         color: 'info',

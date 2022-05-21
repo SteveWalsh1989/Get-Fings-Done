@@ -1,7 +1,7 @@
 <template>
   <v-list-item
     :class="{ 'blue lighten-5': task.completed }"
-    class="rounded"
+    class="my-1 rounded"
     @click="toggleTaskCompletion(task.id)"
   >
     <template v-slot:default>
@@ -24,7 +24,7 @@
       </v-list-item-content>
 
       <v-list-item-action>
-        <v-btn @click.stop="showModal = true" aria-label="Delete" icon>
+        <v-btn @click.stop="showModal = !showModal" aria-label="Delete" icon>
           <v-icon color="primary lighten-1">mdi-trash-can-outline</v-icon>
         </v-btn>
         <Modal
