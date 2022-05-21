@@ -57,12 +57,16 @@ export default new Vuex.Store({
      * Notifications
      */
     showNotification(state, { text, color }) {
-      console.log(' showNotification text: ', text);
-      console.log(' showNotification color: ', color);
-
-      state.notification.text = text;
-      state.notification.color = color;
-      state.notification.show = true;
+      let timeout = 0;
+      if (state.notification.show) {
+        state.notification.show = false;
+        timeout = 400;
+      }
+      setTimeout(() => {
+        state.notification.text = text;
+        state.notification.color = color;
+        state.notification.show = true;
+      }, timeout);
     },
     hideNotification(state) {
       state.notification.show = false;

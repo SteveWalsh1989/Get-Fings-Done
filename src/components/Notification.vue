@@ -25,16 +25,12 @@ export default {
   components: {},
   setup() {
     const notification = computed(() => store.state.notification);
-    console.log('Notification: ', notification.value);
-
-    const text = 'Testing out Notification ';
-
-    const timeout = 40000; // TODO: change to small number after test
+    const timeout = 4000;
 
     const hideNotification = () => {
       store.commit('hideNotification');
     };
-    return { notification, hideNotification, text, timeout };
+    return { notification, hideNotification, timeout };
   },
 };
 </script>
