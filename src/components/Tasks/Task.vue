@@ -18,6 +18,7 @@
         <v-btn @click.stop="deleteTask(task.id)" icon>
           <v-icon color="primary lighten-1">mdi-trash-can-outline</v-icon>
         </v-btn>
+      </v-list-item-action>
     </template>
   </v-list-item>
 </template>
