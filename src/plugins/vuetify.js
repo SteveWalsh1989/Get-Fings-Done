@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
 import VueCompositionApi from '@vue/composition-api';
+import Vuex from 'vuex';
 
+Vue.use(Vuex);
 Vue.use(Vuetify);
 Vue.use(VueCompositionApi);
-
 export default new Vuetify({
   theme: {
     themes: {

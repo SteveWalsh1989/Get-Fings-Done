@@ -45,49 +45,27 @@
 </template>
 
 <script>
-import { ref } from '@vue/composition-api';
+import { computed, ref } from '@vue/composition-api';
 import EmptyState from '@/components/EmptyState';
+import store from '@/store';
 export default {
   name: 'Home',
   components: { EmptyState },
   setup() {
     const newTaskTitle = ref('');
-    const tasks = ref([
-      {
-        id: 1,
-        title: 'Buy milk',
-        description: 'Get some milk from the store',
-        completed: false,
-      },
-      {
-        id: 2,
-        title: 'Buy eggs',
-        description: 'Get some eggs from the store',
-        completed: false,
-      },
-      {
-        id: 3,
-        title: 'Buy bread',
-        description: 'Get some bread from the store',
-        completed: false,
-      },
-    ]);
+    const tasks = computed(() => store.state.tasks);
 
     function toggleTaskCompletion(id) {
       let task = tasks.value.filter((task) => task.id === id)[0];
       task.completed = !task.completed;
     }
-    function addTask() {
-      tasks.value.push({
-        id: tasks.value.length + 1, // temp hack for id for now
-        title: newTaskTitle.value,
-        description: '',
-        completed: false,
-      });
-      newTaskTitle.value = '';
-    }
+
+    const addTask = () => {
+      store.commit('addTask', newTaskTitle.value);
+    };
+
     function deleteTask(id) {
-      tasks.value = tasks.value.filter((task) => task.id !== id);
+      store.commit('deleteTask', id);
     }
 
     return {
