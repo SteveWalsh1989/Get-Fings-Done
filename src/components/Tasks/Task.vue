@@ -24,25 +24,32 @@
       </v-list-item-content>
 
       <v-list-item-action>
-        <v-btn @click.stop="deleteTask(task.id)" aria-label="Delete" icon>
+        <v-btn @click.stop="" aria-label="Delete" icon>
           <v-icon color="primary lighten-1">mdi-trash-can-outline</v-icon>
         </v-btn>
+        <Modal
+          :show="false"
+          title="Are you sure?"
+          text="This will delete the fing"
+          :action="deleteTask(task.id)"
+        />
       </v-list-item-action>
     </template>
   </v-list-item>
 </template>
 
 <script>
-import { computed } from '@vue/composition-api';
+import { computed, ref } from '@vue/composition-api';
 import store from '@/store';
-
+import Modal from '@/components/Modal';
 export default {
   name: 'Task',
-  components: {},
+  components: { Modal },
   props: {
     task: { type: Object, required: true },
   },
   setup() {
+    const showModal = ref(false);
     function toggleTaskCompletion(id) {
       const tasks = computed(() => store.state.tasks);
       let task = tasks.value.filter((task) => task.id === id)[0];
@@ -57,7 +64,7 @@ export default {
       store.dispatch('deleteTask', id);
     }
 
-    return { deleteTask, toggleTaskCompletion };
+    return { deleteTask, showModal, toggleTaskCompletion };
   },
 };
 </script>
