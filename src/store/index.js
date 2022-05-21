@@ -25,8 +25,15 @@ export default new Vuex.Store({
         completed: false,
       },
     ],
+    notification: {
+      show: true,
+      text: '',
+    },
   },
   mutations: {
+    /*
+     * Tasks
+     */
     addTask(state, newTaskTitle) {
       state.tasks.push({
         id: state.tasks.length + 1, // temp hack for id for now
@@ -34,6 +41,8 @@ export default new Vuex.Store({
         description: '',
         completed: false,
       });
+      state.notification.show = true;
+      state.notification.text = `Added new fing: ${newTaskTitle}`;
     },
     deleteTask(state, id) {
       state.tasks = state.tasks.filter((task) => task.id !== id);
@@ -45,6 +54,18 @@ export default new Vuex.Store({
     uncompleteTask(state, id) {
       const index = state.tasks.findIndex((obj) => obj.id == id);
       state.tasks[index].completed = false;
+    },
+    /*
+     * Notifications
+     */
+    setNotification(state, notification) {
+      state.notification.text = notification.text;
+    },
+    showNotification(state) {
+      state.notification.text = true;
+    },
+    hideNotification(state) {
+      state.notification.show = false;
     },
   },
   actions: {},

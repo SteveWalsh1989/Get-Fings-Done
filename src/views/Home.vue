@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { computed, ref } from '@vue/composition-api';
+import { computed } from '@vue/composition-api';
 import EmptyState from '@/components/Tasks/EmptyState';
 import AddTask from '@/components/Tasks/AddTask';
 import Tasklist from '@/components/Tasks/Tasklist';
