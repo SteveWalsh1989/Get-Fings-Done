@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -28,6 +27,7 @@ export default new Vuex.Store({
     notification: {
       show: true,
       text: '',
+      color: 'info',
     },
   },
   mutations: {
@@ -41,28 +41,45 @@ export default new Vuex.Store({
         description: '',
         completed: false,
       });
-      state.notification.show = true;
-      state.notification.text = `Added new fing: ${newTaskTitle}`;
+      this.commit('showNotification', {
+        text: `Added fing: ${newTaskTitle}`,
+        color: 'success',
+      });
     },
     deleteTask(state, id) {
+      const index = state.tasks.findIndex((obj) => obj.id == id);
+      this.commit('showNotification', {
+        text: `Deleted: ${state.tasks[index].title}`,
+        color: 'warning',
+      });
       state.tasks = state.tasks.filter((task) => task.id !== id);
     },
     completeTask(state, id) {
       const index = state.tasks.findIndex((obj) => obj.id == id);
       state.tasks[index].completed = true;
+      this.commit('showNotification', {
+        text: `Completed: ${state.tasks[index].title}`,
+        color: 'info',
+      });
     },
     uncompleteTask(state, id) {
       const index = state.tasks.findIndex((obj) => obj.id == id);
       state.tasks[index].completed = false;
+      this.commit('showNotification', {
+        text: `Unompleted: ${state.tasks[index].title}`,
+        color: 'info',
+      });
     },
     /*
      * Notifications
      */
-    setNotification(state, notification) {
-      state.notification.text = notification.text;
-    },
-    showNotification(state) {
-      state.notification.text = true;
+    showNotification(state, { text, color }) {
+      console.log(' showNotification text: ', text);
+      console.log(' showNotification color: ', color);
+
+      state.notification.text = text;
+      state.notification.color = color;
+      state.notification.show = true;
     },
     hideNotification(state) {
       state.notification.show = false;
