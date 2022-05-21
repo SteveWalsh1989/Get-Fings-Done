@@ -47,14 +47,14 @@ export default {
       const tasks = computed(() => store.state.tasks);
       let task = tasks.value.filter((task) => task.id === id)[0];
       if (task.completed) {
-        store.commit('uncompleteTask', id);
+        store.dispatch('uncompleteTask', id);
       } else {
-        store.commit('completeTask', id);
+        store.dispatch('completeTask', id);
       }
     }
 
     function deleteTask(id) {
-      store.commit('deleteTask', id);
+      store.dispatch('deleteTask', id);
     }
 
     return { deleteTask, toggleTaskCompletion };

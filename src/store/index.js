@@ -25,7 +25,7 @@ export default new Vuex.Store({
       },
     ],
     notification: {
-      show: true,
+      show: false,
       text: '',
       color: 'info',
     },
@@ -41,34 +41,17 @@ export default new Vuex.Store({
         description: '',
         completed: false,
       });
-      this.commit('showNotification', {
-        text: `Added fing: ${newTaskTitle}`,
-        color: 'success',
-      });
     },
     deleteTask(state, id) {
-      const index = state.tasks.findIndex((obj) => obj.id == id);
-      this.commit('showNotification', {
-        text: `Deleted: ${state.tasks[index].title}`,
-        color: 'warning',
-      });
       state.tasks = state.tasks.filter((task) => task.id !== id);
     },
     completeTask(state, id) {
       const index = state.tasks.findIndex((obj) => obj.id == id);
       state.tasks[index].completed = true;
-      this.commit('showNotification', {
-        text: `Completed: ${state.tasks[index].title}`,
-        color: 'info',
-      });
     },
     uncompleteTask(state, id) {
       const index = state.tasks.findIndex((obj) => obj.id == id);
       state.tasks[index].completed = false;
-      this.commit('showNotification', {
-        text: `Unompleted: ${state.tasks[index].title}`,
-        color: 'info',
-      });
     },
     /*
      * Notifications
@@ -85,6 +68,35 @@ export default new Vuex.Store({
       state.notification.show = false;
     },
   },
-  actions: {},
+  actions: {
+    addTask({ commit }, newTaskTitle) {
+      commit('addTask', newTaskTitle);
+      commit('showNotification', {
+        text: 'Added fing',
+        color: 'success',
+      });
+    },
+    deleteTask({ commit }, id) {
+      commit('deleteTask', id);
+      commit('showNotification', {
+        text: 'Deleted fing',
+        color: 'warning',
+      });
+    },
+    completeTask({ commit }, id) {
+      commit('completeTask', id);
+      commit('showNotification', {
+        text: 'Completed fing',
+        color: 'info',
+      });
+    },
+    uncompleteTask({ commit }, id) {
+      commit('deleteTask', id);
+      commit('showNotification', {
+        text: 'Uncompleted fing',
+        color: 'info',
+      });
+    },
+  },
   modules: {},
 });

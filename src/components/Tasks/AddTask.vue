@@ -22,7 +22,7 @@ export default {
     const newTaskTitle = ref('');
 
     const addTask = () => {
-      store.commit('addTask', newTaskTitle.value);
+      store.dispatch('addTask', newTaskTitle.value);
       newTaskTitle.value = '';
     };
     return {
