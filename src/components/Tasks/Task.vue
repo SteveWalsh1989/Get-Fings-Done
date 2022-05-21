@@ -24,14 +24,15 @@
       </v-list-item-content>
 
       <v-list-item-action>
-        <v-btn @click.stop="" aria-label="Delete" icon>
+        <v-btn @click.stop="showModal = true" aria-label="Delete" icon>
           <v-icon color="primary lighten-1">mdi-trash-can-outline</v-icon>
         </v-btn>
         <Modal
-          :show="false"
+          v-if="showModal"
+          :show="showModal"
           title="Are you sure?"
           text="This will delete the fing"
-          :action="deleteTask(task.id)"
+          @confirmed="deleteTask(task.id)"
         />
       </v-list-item-action>
     </template>

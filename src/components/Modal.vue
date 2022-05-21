@@ -7,10 +7,10 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="green darken-1" text @click="showDialog = false">
+        <v-btn color="blue" text @click="showDialog = false">
           {{ negative }}
         </v-btn>
-        <v-btn color="green darken-1" text @click="positiveAction()">
+        <v-btn color="blue" text @click="$emit('confirmed')">
           {{ positive }}
         </v-btn>
       </v-card-actions>
@@ -27,18 +27,14 @@ export default {
   props: {
     show: { type: Boolean, default: false },
     title: { type: String, required: true },
-    text: { type: String, required: true },
+    text: { type: String, default: '' },
     positive: { type: String, default: 'Yes' },
     negative: { type: String, default: 'No' },
-    action: { type: Function },
   },
   setup(props) {
     const showDialog = ref(props.show);
-    function positiveAction() {
-      props.action();
-      showDialog = false;
-    }
-    return { positiveAction, showDialog };
+
+    return { showDialog };
   },
 };
 </script>
