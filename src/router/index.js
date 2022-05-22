@@ -8,11 +8,6 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'root',
-    component: Home,
-  },
-  {
-    path: '/home',
     name: 'Home',
     component: Home,
   },
@@ -25,6 +20,11 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = `Fings: ${to.name}`;
+  next();
 });
 
 export default router;

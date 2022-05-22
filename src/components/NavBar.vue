@@ -76,7 +76,7 @@
 
 <script>
 import { computed, ref } from 'vue-demi';
-import { navDrawerItems } from '@/views/constants';
+import { navDrawerItems } from '@/utils/constants';
 import store from '@/store';
 import { format } from 'date-fns';
 export default {
