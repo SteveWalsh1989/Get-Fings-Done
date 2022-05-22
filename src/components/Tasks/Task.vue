@@ -22,7 +22,11 @@
           {{ task.title }}
         </v-list-item-title>
       </v-list-item-content>
-
+      <v-list-item-action>
+        <v-list-item-action-text>
+          {{ formatDate(task.dueDate) }}
+        </v-list-item-action-text>
+      </v-list-item-action>
       <v-list-item-action>
         <TaskOptions :task="task" />
       </v-list-item-action>
@@ -34,7 +38,8 @@
 import { computed } from '@vue/composition-api';
 import store from '@/store';
 import TaskOptions from '@/components/Tasks/TaskOptions';
-
+import { formatDate } from '../../utils/helpers';
+import { DateTime } from 'luxon';
 export default {
   name: 'Task',
   components: { TaskOptions },
@@ -52,7 +57,7 @@ export default {
       }
     }
 
-    return { toggleTaskCompletion };
+    return { DateTime, formatDate, toggleTaskCompletion };
   },
 };
 </script>
