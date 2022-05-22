@@ -87,7 +87,7 @@ export default {
       store.dispatch('deleteTask', id);
     }
     function editTaskTitle(value) {
-      store.commit('editTaskTitle', { id: value.id, newTitle: value.title });
+      store.dispatch('editTaskTitle', { id: value.id, newTitle: value.title });
       showModal.value.editTask = false;
     }
 

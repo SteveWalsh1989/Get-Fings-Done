@@ -43,11 +43,8 @@ export default new Vuex.Store({
       });
     },
     editTaskTitle(state, { id, newTitle }) {
-      console.log('editTaskTitle', id, newTitle);
       const index = state.tasks.findIndex((obj) => obj.id == id);
-      console.log(' before: state.tasks[index]', state.tasks[index]);
       state.tasks[index].title = newTitle;
-      console.log('after : state.tasks[index]', state.tasks[index]);
     },
     deleteTask(state, id) {
       state.tasks = state.tasks.filter((task) => task.id !== id);
@@ -85,6 +82,13 @@ export default new Vuex.Store({
       commit('showNotification', {
         text: 'Added fing',
         color: 'success',
+      });
+    },
+    editTaskTitle({ commit }, { id, newTitle }) {
+      commit('editTaskTitle', { id, newTitle });
+      commit('showNotification', {
+        text: "Edited fing's title",
+        color: 'info',
       });
     },
     deleteTask({ commit }, id) {
