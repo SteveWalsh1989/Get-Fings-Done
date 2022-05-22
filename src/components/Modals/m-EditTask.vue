@@ -11,10 +11,15 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue" text @click="cancel">
+        <v-btn text @click="cancel">
           {{ negative }}
         </v-btn>
-        <v-btn color="blue" text @click="saveTitle">
+        <v-btn
+          :disabled="newTitle.length === 0"
+          color="blue"
+          text
+          @click="saveTitle"
+        >
           {{ positive }}
         </v-btn>
       </v-card-actions>

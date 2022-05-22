@@ -5,10 +5,10 @@
       <v-card-text> {{ text }} </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue" text @click="$emit('closed')">
+        <v-btn color="red" text @click="$emit('closed')">
           {{ negative }}
         </v-btn>
-        <v-btn color="blue" text @click="$emit('confirmed')">
+        <v-btn text @click="$emit('confirmed')">
           {{ positive }}
         </v-btn>
       </v-card-actions>
@@ -28,8 +28,8 @@ export default {
   setup(props) {
     const title = 'Are you sure?';
     const text = 'This will delete the fing';
-    const positive = 'yes';
-    const negative = 'no';
+    const positive = 'Delete';
+    const negative = 'cancel';
     const showDialog = ref(props.show);
 
     return { showDialog, negative, positive, text, title };
