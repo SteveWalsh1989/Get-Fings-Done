@@ -6,18 +6,15 @@
         <v-text-field
           :placeholder="task.title"
           v-model="newTitle"
+          @keyup.enter="saveTitle"
         ></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue" text @click="$emit('cancel')">
+        <v-btn color="blue" text @click="cancel">
           {{ negative }}
         </v-btn>
-        <v-btn
-          color="blue"
-          text
-          @click="$emit('save', { id: task.id, title: newTitle })"
-        >
+        <v-btn color="blue" text @click="saveTitle">
           {{ positive }}
         </v-btn>
       </v-card-actions>
@@ -35,14 +32,29 @@ export default {
     show: { type: Boolean, default: false },
     task: { type: Object, required: true },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const newTitle = ref('');
     const title = "Change fing's title";
     const positive = 'save';
     const negative = 'cancel';
     const showDialog = ref(props.show);
 
-    return { negative, newTitle, positive, showDialog, title };
+    function saveTitle() {
+      emit('save', { id: props.task.id, title: newTitle.value });
+    }
+    function cancel() {
+      emit('cancel');
+    }
+
+    return {
+      cancel,
+      negative,
+      newTitle,
+      positive,
+      saveTitle,
+      showDialog,
+      title,
+    };
   },
 };
 </script>
