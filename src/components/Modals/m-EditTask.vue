@@ -14,12 +14,7 @@
         <v-btn text @click="cancel">
           {{ negative }}
         </v-btn>
-        <v-btn
-          :disabled="newTitle.length === 0"
-          color="blue"
-          text
-          @click="saveTitle"
-        >
+        <v-btn :disabled="invalidTitle" color="blue" text @click="saveTitle">
           {{ positive }}
         </v-btn>
       </v-card-actions>
@@ -28,7 +23,7 @@
 </template>
 
 <script>
-import { ref } from '@vue/composition-api';
+import { computed, ref } from '@vue/composition-api';
 
 export default {
   name: 'm-EditTask',
@@ -39,6 +34,9 @@ export default {
   },
   setup(props, { emit }) {
     const newTitle = ref('');
+    const invalidTitle = computed(
+      () => newTitle.value.length === 0 || newTitle.value === props.task.title,
+    );
     const title = "Change fing's title";
     const positive = 'save';
     const negative = 'cancel';
@@ -53,6 +51,7 @@ export default {
 
     return {
       cancel,
+      invalidTitle,
       negative,
       newTitle,
       positive,
