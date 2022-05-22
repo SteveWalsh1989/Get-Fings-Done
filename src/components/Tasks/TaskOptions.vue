@@ -35,6 +35,13 @@
       @confirmed="deleteTask(task.id)"
       @closed="showModal.deleteTask = false"
     />
+    <mEditDate
+      v-if="showModal.editDate"
+      :show="showModal.editDate"
+      :task="task"
+      @confirmed="editTaskDate"
+      @cancel="showModal.editDate = false"
+    />
   </div>
 </template>
 
@@ -43,11 +50,13 @@ import Vue from 'vue';
 import { ref } from '@vue/composition-api';
 import mDeleteTask from '@/components/Modals/m-DeleteTask';
 import mEditTask from '@/components/Modals/m-EditTask';
+import mEditDate from '@/components/Modals/m-EditDate';
+
 import store from '@/store';
 
 export default {
   name: 'TaskOptions',
-  components: { mDeleteTask, mEditTask },
+  components: { mDeleteTask, mEditDate, mEditTask },
   props: {
     task: { type: Object, required: true },
   },
@@ -55,6 +64,7 @@ export default {
     const showModal = ref({
       deleteTask: false,
       editTask: false,
+      editDate: false,
     });
 
     const options = [
@@ -71,7 +81,7 @@ export default {
         icon: 'mdi-calendar-blank-outline',
         disabled: props.task.completed,
         click() {
-          console.log('dueDate');
+          showModal.value.editDate = true;
         },
       },
       {
@@ -91,8 +101,17 @@ export default {
       showModal.value.editTask = false;
     }
 
+    function editTaskDate(value) {
+      store.dispatch('editTaskDate', {
+        id: props.task.id,
+        newDate: value,
+      });
+      showModal.value.editDate = false;
+    }
+
     return {
       deleteTask,
+      editTaskDate,
       editTaskTitle,
       options,
       showModal,
