@@ -1,5 +1,6 @@
 <template>
   <nav>
+    <!-- Nav Drawer -->
     <v-navigation-drawer class="primary white--text" v-model="drawerOpen" app>
       <v-list-item class="white--text">
         <v-list-item-content>
@@ -30,18 +31,33 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar color="primary" app>
-      <v-app-bar-nav-icon
-        color="white"
-        @click="drawerOpen = !drawerOpen"
-      ></v-app-bar-nav-icon>
-      <v-toolbar-title class="font-semibold white--text">Fings</v-toolbar-title>
+    <!-- Left hand side-->
 
+    <v-app-bar color="primary" app prominent>
+      <v-container>
+        <v-row>
+          <v-app-bar-nav-icon
+            color="white"
+            @click="drawerOpen = !drawerOpen"
+          ></v-app-bar-nav-icon>
+          <v-spacer></v-spacer>
+        </v-row>
+        <v-row>
+          <v-toolbar-title class="font-semibold white--text ml-4 mt-1"
+            >Fings</v-toolbar-title
+          >
+        </v-row>
+        <v-row>
+          <div class="text-sm white--text ml-4">
+            {{ currentTime }}
+          </div>
+        </v-row>
+      </v-container>
       <v-spacer></v-spacer>
-
+      <!-- Right hand side-->
       <v-text-field
         :value="searchTerm"
-        class="expanding-search white--text mt-8 mr-14 w-1/5"
+        class="expanding-search white--text mt-auto mr-14 w-1/5 bottom-4"
         :class="{ closed: searchClosed && !searchTerm }"
         @input="updateSearchTerm($event)"
         @focus="searchClosed = false"
@@ -62,19 +78,28 @@
 import { computed, ref } from 'vue-demi';
 import { navDrawerItems } from '@/views/constants';
 import store from '@/store';
-
+import { format } from 'date-fns';
 export default {
   name: 'NavDrawer',
   setup() {
     const drawerOpen = ref(false);
     const searchClosed = ref(true);
     const searchTerm = computed(() => store.state.searchTerm);
+    const currentTime = ref(null);
 
     function updateSearchTerm(newTerm) {
       store.commit('updateSearchTerm', newTerm);
     }
 
+    function getDate() {
+      currentTime.value = format(new Date(), 'MMMM d, H:mm:ss');
+      setTimeout(getDate, 1000);
+    }
+
+    getDate();
     return {
+      getDate,
+      currentTime,
       drawerOpen,
       navDrawerItems,
       searchClosed,
