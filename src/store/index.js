@@ -39,7 +39,6 @@ export default new Vuex.Store({
      * Search
      */
     updateSearchTerm(state, newTerm) {
-      console.log('reached: vuex > updateSearchTerm', newTerm);
       state.searchTerm = newTerm;
     },
     /*

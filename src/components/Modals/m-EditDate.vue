@@ -19,7 +19,6 @@ export default {
     task: { type: Object, required: true },
   },
   setup(props) {
-    console.log('reached mEditDate');
     const showDialog = ref(props.show);
 
     const date = ref(props.task.dueDate);

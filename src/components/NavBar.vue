@@ -54,7 +54,7 @@
         </v-row>
       </v-container>
       <v-spacer></v-spacer>
-      <!-- Right hand side-->
+      <!-- Right hand side Search-->
       <v-text-field
         :value="searchTerm"
         class="expanding-search white--text mt-auto mr-14 w-1/5 bottom-4"
