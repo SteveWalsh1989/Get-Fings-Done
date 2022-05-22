@@ -22,9 +22,10 @@
           {{ task.title }}
         </v-list-item-title>
       </v-list-item-content>
-      <v-list-item-action>
+      <v-list-item-action v-if="task.dueDate">
         <v-list-item-action-text>
           {{ formatDate(task.dueDate) }}
+          <v-icon class="bottom-0.5" small> mdi-calendar-blank-outline </v-icon>
         </v-list-item-action-text>
       </v-list-item-action>
       <v-list-item-action>
