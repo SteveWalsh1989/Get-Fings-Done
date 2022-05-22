@@ -38,26 +38,66 @@
       <v-toolbar-title class="font-semibold white--text">Fings</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-btn class="white--text" icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
 
-      <v-btn class="white--text" icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-text-field
+        :value="searchTerm"
+        class="expanding-search white--text mt-8 mr-14 w-1/5"
+        :class="{ closed: searchClosed && !searchTerm }"
+        @input="updateSearchTerm($event)"
+        @focus="searchClosed = false"
+        @blur="searchClosed = true"
+        color="white"
+        placeholder="search fings"
+        prepend-inner-icon="mdi-magnify"
+        flat
+        dense
+        clearable
+      >
+      </v-text-field>
     </v-app-bar>
   </nav>
 </template>
 
 <script>
-import { ref } from 'vue-demi';
+import { computed, ref } from 'vue-demi';
 import { navDrawerItems } from '@/views/constants';
+import store from '@/store';
+
 export default {
   name: 'NavDrawer',
   setup() {
     const drawerOpen = ref(false);
+    const searchClosed = ref(true);
+    const searchTerm = computed(() => store.state.searchTerm);
 
-    return { drawerOpen, navDrawerItems };
+    function updateSearchTerm(newTerm) {
+      store.commit('updateSearchTerm', newTerm);
+    }
+
+    return {
+      drawerOpen,
+      navDrawerItems,
+      searchClosed,
+      searchTerm,
+      updateSearchTerm,
+    };
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.expanding-search {
+  transition: max-width 0.4s;
+
+  .v-input__slot {
+    &:before,
+    &:after {
+      border-color: transparent !important;
+    }
+  }
+  &.closed {
+    width: 2rem;
+    max-width: 2rem;
+  }
+}
+</style>

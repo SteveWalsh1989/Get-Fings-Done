@@ -12,7 +12,7 @@ export default {
   name: 'Tasklist',
   components: { Task },
   setup() {
-    const tasks = computed(() => store.state.tasks);
+    const tasks = computed(() => store.getters.filteredTasks);
 
     return {
       tasks,

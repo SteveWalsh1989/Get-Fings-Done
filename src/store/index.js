@@ -27,6 +27,7 @@ export default new Vuex.Store({
         completed: false,
       },
     ],
+    searchTerm: null,
     notification: {
       show: false,
       text: '',
@@ -34,6 +35,13 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    /*
+     * Search
+     */
+    updateSearchTerm(state, newTerm) {
+      console.log('reached: vuex > updateSearchTerm', newTerm);
+      state.searchTerm = newTerm;
+    },
     /*
      * Tasks
      */
@@ -126,6 +134,18 @@ export default new Vuex.Store({
         text: 'Uncompleted fing',
         color: 'info',
       });
+    },
+  },
+  getters: {
+    filteredTasks(state) {
+      if (state.searchTerm) {
+        return state.tasks.filter((task) => {
+          return task.title
+            .toLowerCase()
+            .includes(state.searchTerm.toLowerCase());
+        });
+      }
+      return state.tasks;
     },
   },
   modules: {},
