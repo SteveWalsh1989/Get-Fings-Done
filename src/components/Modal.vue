@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="showDialog" max-width="290">
+  <v-dialog v-model="showDialog" max-width="290" persistent>
     <v-card>
       <v-card-title class="text-h5"> {{ title }} </v-card-title>
       <v-card-text>
@@ -7,7 +7,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue" text @click="showDialog = false">
+        <v-btn color="blue" text @click="$emit('closed')">
           {{ negative }}
         </v-btn>
         <v-btn color="blue" text @click="$emit('confirmed')">
@@ -32,6 +32,7 @@ export default {
     negative: { type: String, default: 'No' },
   },
   setup(props) {
+    console.log('modal created');
     const showDialog = ref(props.show);
 
     return { showDialog };
