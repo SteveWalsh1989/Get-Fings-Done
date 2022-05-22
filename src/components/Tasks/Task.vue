@@ -24,7 +24,7 @@
       </v-list-item-content>
 
       <v-list-item-action>
-        <TaskOptions :task-id="task.id" />
+        <TaskOptions :task="task" />
       </v-list-item-action>
     </template>
   </v-list-item>

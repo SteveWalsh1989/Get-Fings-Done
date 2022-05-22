@@ -2,9 +2,7 @@
   <v-dialog v-model="showDialog" max-width="290" persistent>
     <v-card>
       <v-card-title class="text-h5"> {{ title }} </v-card-title>
-      <v-card-text>
-        {{ text }}
-      </v-card-text>
+      <v-card-text> {{ text }} </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue" text @click="$emit('closed')">
@@ -22,20 +20,19 @@
 import { computed, ref } from '@vue/composition-api';
 
 export default {
-  name: 'Modal',
+  name: 'm-DeleteTask',
   components: {},
   props: {
     show: { type: Boolean, default: false },
-    title: { type: String, required: true },
-    text: { type: String, default: '' },
-    positive: { type: String, default: 'Yes' },
-    negative: { type: String, default: 'No' },
   },
   setup(props) {
-    console.log('modal created');
+    const title = 'Are you sure?';
+    const text = 'This will delete the fing';
+    const positive = 'yes';
+    const negative = 'no';
     const showDialog = ref(props.show);
 
-    return { showDialog };
+    return { showDialog, negative, positive, text, title };
   },
 };
 </script>

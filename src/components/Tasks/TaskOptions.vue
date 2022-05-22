@@ -19,52 +19,60 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    <Modal
-      v-if="showModal"
-      :show="showModal"
-      title="Are you sure?"
-      text="This will delete the fing"
-      @confirmed="deleteTask(taskId)"
-      @closed="showModal = false"
+    <mEditTask
+      v-if="showModal.editTask"
+      :show="showModal.editTask"
+      :task="task"
+      @save="editTaskTitle"
+      @cancel="showModal.editTask = false"
+    />
+    <mDeleteTask
+      v-if="showModal.deleteTask"
+      :show="showModal.deleteTask"
+      @confirmed="deleteTask(task.id)"
+      @closed="showModal.deleteTask = false"
     />
   </div>
 </template>
 
 <script>
 import { ref } from '@vue/composition-api';
-import Modal from '@/components/Modal';
+import mDeleteTask from '@/components/Modals/m-DeleteTask';
+import mEditTask from '@/components/Modals/m-EditTask';
 import store from '@/store';
 
 export default {
   name: 'TaskOptions',
-  components: { Modal },
+  components: { mDeleteTask, mEditTask },
   props: {
-    taskId: { type: Number, required: true },
+    task: { type: Object, required: true },
   },
   setup(props) {
-    const showModal = ref(false);
+    const showModal = ref({
+      deleteTask: false,
+      editTask: false,
+    });
 
     const options = [
       {
         title: 'Edit',
         icon: 'mdi-pencil-outline',
         click() {
-          console.log('Edit', props.taskId);
+          showModal.value.editTask = true;
         },
       },
       {
         title: 'Due Date',
         icon: 'mdi-calendar-blank-outline',
         click() {
-          console.log('Due date', props.taskId);
+          console.log('dueDate');
         },
       },
       {
         title: 'Delete',
         icon: 'mdi-delete',
         click() {
-          showModal.value = true;
-          console.log('showModal', showModal.value);
+          showModal.value.deleteTask = true;
         },
       },
     ];
@@ -72,8 +80,17 @@ export default {
     function deleteTask(id) {
       store.dispatch('deleteTask', id);
     }
+    function editTaskTitle(value) {
+      store.commit('editTaskTitle', { id: value.id, newTitle: value.title });
+      showModal.value.editTask = false;
+    }
 
-    return { deleteTask, options, showModal };
+    return {
+      deleteTask,
+      editTaskTitle,
+      options,
+      showModal,
+    };
   },
 };
 </script>

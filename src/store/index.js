@@ -42,6 +42,13 @@ export default new Vuex.Store({
         completed: false,
       });
     },
+    editTaskTitle(state, { id, newTitle }) {
+      console.log('editTaskTitle', id, newTitle);
+      const index = state.tasks.findIndex((obj) => obj.id == id);
+      console.log(' before: state.tasks[index]', state.tasks[index]);
+      state.tasks[index].title = newTitle;
+      console.log('after : state.tasks[index]', state.tasks[index]);
+    },
     deleteTask(state, id) {
       state.tasks = state.tasks.filter((task) => task.id !== id);
     },
