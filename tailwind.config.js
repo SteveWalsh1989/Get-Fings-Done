@@ -14,6 +14,7 @@ module.exports = {
       transform: ['hover'],
       scale: ['hover'],
       cursor: ['hover', 'active'],
+      border: ['hover', 'active'],
     },
   },
   plugins: [],

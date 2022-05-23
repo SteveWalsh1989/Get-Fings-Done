@@ -3,7 +3,7 @@
     v-model="newTaskTitle"
     @click:append="addTask"
     @keyup.enter="addTask"
-    class="ml-14 pa-3"
+    class="ml-2 pa-3"
     clearable
     hide-details
     outlined
