@@ -7,29 +7,7 @@ let db = new Localbase('db');
 
 export default new Vuex.Store({
   state: {
-    tasks: [
-      {
-        id: 1,
-        title: 'Buy milk',
-        dueDate: '2022-05-22',
-        description: 'Get some milk from the store',
-        completed: false,
-      },
-      {
-        id: 2,
-        title: 'Buy eggs',
-        dueDate: '2024-05-23',
-        description: 'Get some eggs from the store',
-        completed: false,
-      },
-      {
-        id: 3,
-        title: 'Buy bread',
-        dueDate: null,
-        description: 'Get some bread from the store',
-        completed: false,
-      },
-    ],
+    tasks: [],
     searchTerm: null,
     notification: {
       show: false,
