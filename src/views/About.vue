@@ -1,12 +1,12 @@
 <template>
-  <v-container class="text-sm grey--text">
-    <h1 class="font-semibold">About this small project</h1>
+  <v-container class="mt-8 ml-6 text-sm dark-grey--text">
+    <h1 class="font-semibold black--text">About this small project</h1>
     <p class="mt-4">
       The goal of this mini project is to test out the Vuetify framework by
       making a small todo task application
     </p>
     <v-list dense>
-      <v-subheader>Features</v-subheader>
+      <v-subheader class="font-semibold black--text">Features</v-subheader>
       <v-list-item-group v-model="selectedItem" color="primary">
         <v-list-item v-for="(item, i) in features" :key="i" disabled>
           <v-list-item-content>
@@ -28,6 +28,8 @@ export default {
       'Vue Router for routing',
       'dateFns for date formatting',
       'vue-demi for vue3 setup format',
+      'vue-draggabole reordering',
+      'localbase for browser storage',
     ];
     return { features };
   },
