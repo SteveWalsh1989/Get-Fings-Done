@@ -2,8 +2,25 @@
   <v-list-item
     :class="{ 'blue lighten-5': task.completed }"
     class="my-1 rounded"
+    @mouseover="hover = true"
+    @mouseleave="hover = false"
   >
     <template v-slot:default>
+      <v-list-item-action>
+        <div class="w-6">
+          <v-btn
+            v-show="hover"
+            class="cursor-move"
+            color="grey"
+            @mousedown="drag = true"
+            @mouseup="drag = false"
+            dark
+            icon
+          >
+            <v-icon>mdi-drag-horizontal-variant</v-icon>
+          </v-btn>
+        </div>
+      </v-list-item-action>
       <v-list-item-action>
         <v-checkbox
           @click="toggleTaskCompletion(task.id)"
@@ -48,6 +65,8 @@ export default {
     task: { type: Object, required: true },
   },
   setup() {
+    const hover = ref(false);
+
     function toggleTaskCompletion(id) {
       const tasks = computed(() => store.state.tasks);
       let task = tasks.value.filter((task) => task.id === id)[0];
@@ -58,7 +77,7 @@ export default {
       }
     }
 
-    return { DateTime, formatDate, toggleTaskCompletion };
+    return { DateTime, formatDate, hover, toggleTaskCompletion };
   },
 };
 </script>
