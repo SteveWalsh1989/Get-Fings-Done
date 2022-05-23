@@ -57,7 +57,7 @@
       <!-- Right hand side Search-->
       <v-text-field
         :value="searchTerm"
-        class="expanding-search white--text mt-auto mr-14 w-1/5 bottom-4"
+        class="expanding-search white--text mt-auto lg:mr-24 sm:mr-24 w-1/5 bottom-4"
         :class="{ closed: searchClosed && !searchTerm }"
         @input="updateSearchTerm($event)"
         @focus="searchClosed = false"
@@ -113,11 +113,18 @@ export default {
 <style lang="scss" scoped>
 .expanding-search {
   transition: max-width 0.4s;
+  &::v-deep .v-icon {
+    color: white;
+  }
 
-  .v-input__slot {
+  &::v-deep.v-input__slot {
     &:before,
     &:after {
       border-color: transparent !important;
+    }
+
+    &:before {
+      border-style: none !important;
     }
   }
   &.closed {

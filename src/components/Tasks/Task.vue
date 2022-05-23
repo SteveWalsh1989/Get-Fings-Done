@@ -67,8 +67,6 @@ export default {
     task: { type: Object, required: true },
   },
   setup() {
-    const hover = ref(false);
-
     function toggleTaskCompletion(id) {
       const tasks = computed(() => store.state.tasks);
       let task = tasks.value.filter((task) => task.id === id)[0];
@@ -79,7 +77,7 @@ export default {
       }
     }
 
-    return { DateTime, formatDate, hover, toggleTaskCompletion };
+    return { DateTime, formatDate, toggleTaskCompletion };
   },
 };
 </script>
