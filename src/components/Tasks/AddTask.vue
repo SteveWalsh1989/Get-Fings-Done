@@ -3,7 +3,7 @@
     v-model="newTaskTitle"
     @click:append="addTask"
     @keyup.enter="addTask"
-    class="pa-3"
+    class="ml-14 pa-3"
     clearable
     hide-details
     outlined
@@ -33,5 +33,4 @@ export default {
 };
 </script>
 
-<style scoped></style>
  

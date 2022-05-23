@@ -72,6 +72,9 @@ export default new Vuex.Store({
       const index = state.tasks.findIndex((obj) => obj.id == id);
       state.tasks[index].completed = false;
     },
+    updateTaskListOrder(state, newList) {
+      state.tasks = newList;
+    },
     /*
      * Notifications
      */

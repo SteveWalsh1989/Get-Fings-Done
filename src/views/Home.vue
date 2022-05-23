@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="m-0">
     <AddTask />
     <Tasklist v-if="tasks.length" />
     <EmptyState v-else />

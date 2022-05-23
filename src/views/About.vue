@@ -1,5 +1,5 @@
 <template>
-  <v-container class="ml-4 mt-4 text-sm grey--text">
+  <v-container class="text-sm grey--text">
     <h1 class="font-semibold">About this small project</h1>
     <p class="mt-4">
       The goal of this mini project is to test out the Vuetify framework by

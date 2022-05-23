@@ -2,18 +2,18 @@
   <v-list-item
     :class="{ 'blue lighten-5': task.completed }"
     class="my-1 rounded"
-    @click="toggleTaskCompletion(task.id)"
   >
     <template v-slot:default>
       <v-list-item-action>
         <v-checkbox
+          @click="toggleTaskCompletion(task.id)"
           :input-value="task.completed"
           color="primary"
           :aria-pressed="task.completed"
           aria-label="Mark as completed"
         ></v-checkbox>
       </v-list-item-action>
-      <v-list-item-content>
+      <v-list-item-content class="ml-4">
         <v-list-item-title
           :class="{ 'line-through': task.completed }"
           :aria-label="task.title"
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/composition-api';
+import { computed, ref } from '@vue/composition-api';
 import store from '@/store';
 import TaskOptions from '@/components/Tasks/TaskOptions';
 import { formatDate } from '../../utils/helpers';

@@ -13,6 +13,7 @@ module.exports = {
       translate: ['hover'],
       transform: ['hover'],
       scale: ['hover'],
+      cursor: ['hover', 'active'],
     },
   },
   plugins: [],
