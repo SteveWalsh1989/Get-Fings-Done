@@ -13,6 +13,7 @@
     "autoprefixer": "^9.8.8",
     "core-js": "^3.6.5",
     "date-fns": "^2.28.0",
+    "localbase": "^0.7.5",
     "luxon": "^2.4.0",
     "postcss": "^7.0.39",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",

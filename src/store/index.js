@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import Localbase from 'localbase';
 Vue.use(Vuex);
+
+let db = new Localbase('db');
 
 export default new Vuex.Store({
   state: {
@@ -44,14 +47,11 @@ export default new Vuex.Store({
     /*
      * Tasks
      */
-    addTask(state, newTaskTitle) {
-      state.tasks.push({
-        id: state.tasks.length + 1, // temp hack for id for now
-        title: newTaskTitle,
-        dueDate: null,
-        description: '',
-        completed: false,
-      });
+    setTasks(state, tasks) {
+      state.tasks = tasks;
+    },
+    addTask(state, newTask) {
+      state.tasks.push(newTask);
     },
     editTaskTitle(state, { id, newTitle }) {
       const index = state.tasks.findIndex((obj) => obj.id == id);
@@ -71,9 +71,6 @@ export default new Vuex.Store({
     uncompleteTask(state, id) {
       const index = state.tasks.findIndex((obj) => obj.id == id);
       state.tasks[index].completed = false;
-    },
-    updateTaskListOrder(state, newList) {
-      state.tasks = newList;
     },
     /*
      * Notifications
@@ -95,47 +92,98 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    loadTasks({ commit }) {
+      db.collection('tasks')
+        .get()
+        .then((tasks) => {
+          commit('setTasks', tasks);
+        });
+    },
     addTask({ commit }, newTaskTitle) {
-      commit('addTask', newTaskTitle);
-      commit('showNotification', {
-        text: 'Added fing',
-        color: 'success',
-      });
+      let newTask = {
+        id: Date.now(), // temp hack for id for now
+        title: newTaskTitle,
+        dueDate: null,
+        description: '',
+        completed: false,
+      };
+      db.collection('tasks')
+        .add(newTask)
+        .then(() => {
+          commit('addTask', newTask);
+          commit('showNotification', {
+            text: 'Added fing',
+            color: 'success',
+          });
+        });
     },
     editTaskTitle({ commit }, { id, newTitle }) {
-      commit('editTaskTitle', { id, newTitle });
-      commit('showNotification', {
-        text: "Edited fing's title",
-        color: 'info',
-      });
+      db.collection('tasks')
+        .doc({ id: id })
+        .update({
+          title: newTitle,
+        })
+        .then(() => {
+          commit('editTaskTitle', { id, newTitle });
+          commit('showNotification', {
+            text: "Edited fing's title",
+            color: 'info',
+          });
+        });
     },
     editTaskDate({ commit }, { id, newDate }) {
-      commit('editTaskDate', { id, newDate });
-      commit('showNotification', {
-        text: "Edited fing's date",
-        color: 'info',
-      });
+      db.collection('tasks')
+        .doc({ id: id })
+        .update({
+          dueDate: newDate,
+        })
+        .then(() => {
+          commit('editTaskDate', { id, newDate });
+          commit('showNotification', {
+            text: "Edited fing's date",
+            color: 'info',
+          });
+        });
     },
     deleteTask({ commit }, id) {
-      commit('deleteTask', id);
-      commit('showNotification', {
-        text: 'Deleted fing',
-        color: 'warning',
-      });
+      db.collection('tasks')
+        .doc({ id: id })
+        .delete()
+        .then(() => {
+          commit('deleteTask', id);
+          commit('showNotification', {
+            text: 'Deleted fing',
+            color: 'warning',
+          });
+        });
     },
     completeTask({ commit }, id) {
-      commit('completeTask', id);
-      commit('showNotification', {
-        text: 'Completed fing',
-        color: 'info',
-      });
+      db.collection('tasks')
+        .doc({ id: id })
+        .update({
+          completed: true,
+        })
+        .then(() => {
+          commit('completeTask', id);
+          commit('showNotification', {
+            text: 'Completed fing',
+            color: 'info',
+          });
+        });
     },
     uncompleteTask({ commit }, id) {
-      commit('uncompleteTask', id);
-      commit('showNotification', {
-        text: 'Uncompleted fing',
-        color: 'info',
-      });
+      db.collection('tasks')
+        .doc({ id: id })
+        .update({
+          completed: false,
+        })
+        .then(() => {
+          commit('uncompleteTask', id);
+          commit('showNotification', {
+            text: 'Uncompleted fing',
+            color: 'info',
+          });
+        });
     },
   },
   getters: {

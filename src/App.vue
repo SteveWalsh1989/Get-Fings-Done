@@ -9,14 +9,19 @@
 </template>
 
 <script>
-import { ref } from 'vue-demi';
+import { ref, onMounted } from 'vue-demi';
 import NavBar from '@/components/NavBar';
 import Notification from './components/Notification.vue';
+import store from './store';
 export default {
   name: 'App',
   components: { NavBar, Notification },
   setup() {
     const drawerOpen = ref(false);
+
+    onMounted(() => {
+      store.dispatch('loadTasks');
+    });
 
     return { drawerOpen };
   },
