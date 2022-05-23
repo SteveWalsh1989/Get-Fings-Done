@@ -27,7 +27,7 @@ export default {
         return store.getters.filteredTasks;
       },
       set(value) {
-        store.commit('updateTaskListOrder', value);
+        store.dispatch('sortTasks', value);
       },
     });
 

@@ -185,6 +185,13 @@ export default new Vuex.Store({
           });
         });
     },
+    sortTasks({ commit }, tasks) {
+      db.collection('tasks')
+        .set(tasks)
+        .then(() => {
+          commit('setTasks', tasks);
+        });
+    },
   },
   getters: {
     filteredTasks(state) {

@@ -22,7 +22,7 @@ export default {
     const tasks = computed(() => store.state.tasks);
     function updateTaskListOrder() {
       tasks.value.sort((a, b) => a.title.localeCompare(b.title));
-      store.commit('updateTaskListOrder', tasks.value);
+      store.dispatch('sortTasks', tasks.value);
     }
 
     return { updateTaskListOrder };
