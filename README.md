@@ -4,6 +4,7 @@ basic enough task/ todo application to test out the vuetify framework
 
 - using some vue 3 style and composition api for setup layout
 - still using vuex for state management as not implementing apis
+- trying out browser storager using localbase
 
 Interested in testing out the following around Vuetify
 
