@@ -32,4 +32,7 @@ npm run build
 
 ### Customize configuration
 
+
+* if getting errors on node version, run `export NODE_OPTIONS=--openssl-legacy-provider` in console before `npm run serve` 
+
 See [Configuration Reference](https://cli.vuejs.org/config/).
