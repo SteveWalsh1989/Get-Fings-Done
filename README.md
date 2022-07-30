@@ -1,4 +1,4 @@
-# todo--vuetify
+# Get Fings Done
 
 basic enough task/ todo application to test out the vuetify framework
 
